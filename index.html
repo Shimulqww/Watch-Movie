@@ -110,9 +110,7 @@
 <body>
 
 <h1>Watch Movies - Click to Unlock</h1>
-<div class="grid" id="grid">
-  <!-- Items inserted by JS -->
-</div>
+<div class="grid" id="grid"></div>
 
 <div id="overlay">
   <div>Loading... Please wait</div>
@@ -206,14 +204,13 @@ unlockBtn.addEventListener('click', () => {
 });
 
 function redirectToLink(){
-  // Auto domain rotator: pick a link based on currentIndex or random
   const link = adsteraLinks[currentIndex % adsteraLinks.length];
   window.open(link, '_blank');
 }
 
-// Exit intent trigger (desktop only, detect mouse leaving viewport from top)
+// Exit intent (mouse out)
 document.addEventListener('mouseout', (e) => {
-  if(e.clientY <= 10 && !hasExitIntentShown && overlay.classList.contains('visible') === false){
+  if(e.clientY <= 10 && !hasExitIntentShown && !overlay.classList.contains('visible')){
     hasExitIntentShown = true;
     exitIntentModal.classList.add('visible');
   }
@@ -223,7 +220,41 @@ exitIntentClose.addEventListener('click', () => {
   exitIntentModal.classList.remove('visible');
 });
 
-// Initialize
+// Mobile back-button trigger
+let backButtonTriggered = false;
+window.history.pushState({ page: 1 }, "", "");
+window.addEventListener("popstate", function (e) {
+  if (!backButtonTriggered && !hasExitIntentShown && !overlay.classList.contains('visible')) {
+    backButtonTriggered = true;
+    hasExitIntentShown = true;
+    exitIntentModal.classList.add('visible');
+    window.history.pushState({ page: 1 }, "", "");
+  }
+});
+
+// Idle detection (iOS)
+let idleTimeout;
+function resetIdleTimer() {
+  clearTimeout(idleTimeout);
+  idleTimeout = setTimeout(() => {
+    if (!hasExitIntentShown && !overlay.classList.contains('visible')) {
+      hasExitIntentShown = true;
+      exitIntentModal.classList.add('visible');
+    }
+  }, 10000);
+}
+document.addEventListener("touchstart", resetIdleTimer);
+document.addEventListener("scroll", resetIdleTimer);
+resetIdleTimer();
+
+// Scroll to top detection
+window.addEventListener('scroll', () => {
+  if (window.scrollY < 20 && !hasExitIntentShown && !overlay.classList.contains('visible')) {
+    hasExitIntentShown = true;
+    exitIntentModal.classList.add('visible');
+  }
+});
+
 createGrid();
 </script>
 
