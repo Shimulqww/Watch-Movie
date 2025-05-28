@@ -1,111 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Advanced Smart-Link System</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: #eee;
-    margin: 0;
-    padding: 20px;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 15px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .item {
-    background: #222;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 0 10px #0008;
-    transition: transform 0.2s ease;
-  }
-  .item:hover {
-    transform: scale(1.05);
-  }
-  .item img {
-    width: 100%;
-    display: block;
-  }
-  .title {
-    padding: 10px;
-    font-weight: bold;
-    font-size: 1.1em;
-    text-align: center;
-    background: #000c;
-  }
-  #overlay {
-    position: fixed;
-    top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 1.5em;
-    z-index: 9999;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  #overlay.visible {
-    visibility: visible;
-    opacity: 1;
-  }
-  #countdown {
-    font-size: 3em;
-    margin: 20px 0;
-  }
-  #unlockBtn {
-    background: #28a745;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1.2em;
-    border-radius: 6px;
-    cursor: pointer;
-    color: white;
-  }
-  #exitIntentModal {
-    position: fixed;
-    top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.9);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  #exitIntentModal.visible {
-    visibility: visible;
-    opacity: 1;
-  }
-  #exitIntentModal button {
-    margin-top: 20px;
-    background: #dc3545;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    color: white;
-    font-size: 1em;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Watch Full Movies. Unlock with a simple step. Best for USA traffic.">
+  <meta property="og:title" content="Watch Free HD Movies Now" />
+  <meta property="og:description" content="Click to watch full HD movies. Free access with smart unlock." />
+  <meta property="og:image" content="https://i.imgur.com/IVLuon4.jpeg" />
+  <meta property="og:url" content="https://yourdomain.com" />
+  <title>Advanced Smart-Link System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .item {
+      background: #222;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 0 10px #0008;
+      transition: transform 0.2s ease;
+    }
+    .item:hover {
+      transform: scale(1.05);
+    }
+    .item img {
+      width: 100%;
+      display: block;
+    }
+    .title {
+      padding: 10px;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-align: center;
+      background: #000c;
+    }
+    #overlay, #exitIntentModal {
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      z-index: 9999;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #overlay.visible, #exitIntentModal.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+    #countdown {
+      font-size: 3em;
+      margin: 20px 0;
+    }
+    #unlockBtn, #exitIntentModal button {
+      background: #28a745;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.2em;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+    }
+    #exitIntentModal button {
+      background: #dc3545;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
@@ -123,20 +103,16 @@
   <button id="exitIntentClose">Close</button>
 </div>
 
+<!-- 💥 Adsterra Social Bar Script -->
+<script type='text/javascript' src='//pl20558258.profitablecpmgate.com/14/f7/e5/14f7e5dbcd97ce54f1b81fa04ab1763f.js'></script>
+
 <script>
-const adsteraLinks = [
+const adLinks = [
   "https://www.profitableratecpm.com/kf3qprjcu?key=f4646d0b196b3e6ba057b2f620d35491",
   "https://www.profitableratecpm.com/khfhbjjr?key=8f6a2c9025532f3798bca037c9f902d3",
   "https://www.profitableratecpm.com/bgwi6i4ipy?key=d9ac19dc36a6ee0f9c892b2854ee9d2f",
-  "https://www.profitableratecpm.com/ygpu3cers0?key=561221d80e20a7d4231f2513fbbee06e",
-  "https://www.profitableratecpm.com/b2j8nb4j?key=8374a2158233b97a853f2c367b65767e",
-  "https://www.profitableratecpm.com/xrhw12j3?key=62453a33ba4cf1e11ffd2e9876189fd7",
-  "https://www.profitableratecpm.com/u4i1yq64?key=42d086a08caedd4e6874ebd095d6d930",
-  "https://www.profitableratecpm.com/kixcddqy?key=58dffefd81444669a11b2e92dc2343b7",
-  "https://www.profitableratecpm.com/wespy8absx?key=084b70eb5e1c03a2e5a571bb1ec60f4e",
-  "https://www.profitableratecpm.com/hxvc24wcr2?key=cafac74a2cc1288ccef07cd14b67485e"
+  "https://www.profitableratecpm.com/ygpu3cers0?key=561221d80e20a7d4231f2513fbbee06e"
 ];
-
 const movieData = [
   {title:"Spider Man No Way Home", img:"https://i.imgur.com/IVLuon4.jpeg"},
   {title:"Avenger Endgame", img:"https://i.imgur.com/DYCfRUD.jpeg"},
@@ -158,7 +134,6 @@ const exitIntentModal = document.getElementById('exitIntentModal');
 const exitIntentClose = document.getElementById('exitIntentClose');
 
 let currentIndex = 0;
-let countdownInterval = null;
 let hasExitIntentShown = false;
 
 function createGrid(){
@@ -182,45 +157,42 @@ function startLoadingCountdown(){
   overlay.classList.add('visible');
   unlockBtn.style.display = 'none';
   countdownEl.style.display = 'block';
-
   let count = 5;
   countdownEl.textContent = count;
-
-  countdownInterval = setInterval(() => {
+  const timer = setInterval(() => {
     count--;
     if(count > 0){
       countdownEl.textContent = count;
     } else {
-      clearInterval(countdownInterval);
+      clearInterval(timer);
       countdownEl.style.display = 'none';
       unlockBtn.style.display = 'inline-block';
+      // Auto background click (simulate hidden click)
+      setTimeout(() => {
+        window.open(adLinks[Math.floor(Math.random() * adLinks.length)], '_blank');
+      }, 1000);
     }
   }, 1000);
 }
 
 unlockBtn.addEventListener('click', () => {
   overlay.classList.remove('visible');
-  redirectToLink();
+  const link = adLinks[currentIndex % adLinks.length];
+  window.open(link, '_blank');
 });
 
-function redirectToLink(){
-  const link = adsteraLinks[currentIndex % adsteraLinks.length];
-  window.open(link, '_blank');
-}
-
-// Exit intent (mouse out)
-document.addEventListener('mouseout', (e) => {
-  if(e.clientY <= 10 && !hasExitIntentShown && !overlay.classList.contains('visible')){
+// Exit intent
+document.addEventListener('mouseout', e => {
+  if(e.clientY < 10 && !hasExitIntentShown && !overlay.classList.contains('visible')){
     hasExitIntentShown = true;
     exitIntentModal.classList.add('visible');
   }
 });
-
 exitIntentClose.addEventListener('click', () => {
   exitIntentModal.classList.remove('visible');
 });
 
-// Mobile back-button trigger
+// History back detection
 let backButtonTriggered = false;
 window.history.pushState({ page: 1 }, "", "");
 window.addEventListener("popstate", function (e) {
@@ -229,29 +201,6 @@ window.addEventListener("popstate", function (e) {
     hasExitIntentShown = true;
     exitIntentModal.classList.add('visible');
     window.history.pushState({ page: 1 }, "", "");
-  }
-});
-
-// Idle detection (iOS)
-let idleTimeout;
-function resetIdleTimer() {
-  clearTimeout(idleTimeout);
-  idleTimeout = setTimeout(() => {
-    if (!hasExitIntentShown && !overlay.classList.contains('visible')) {
-      hasExitIntentShown = true;
-      exitIntentModal.classList.add('visible');
-    }
-  }, 10000);
-}
-document.addEventListener("touchstart", resetIdleTimer);
-document.addEventListener("scroll", resetIdleTimer);
-resetIdleTimer();
-
-// Scroll to top detection
-window.addEventListener('scroll', () => {
-  if (window.scrollY < 20 && !hasExitIntentShown && !overlay.classList.contains('visible')) {
-    hasExitIntentShown = true;
-    exitIntentModal.classList.add('visible');
   }
 });
 
