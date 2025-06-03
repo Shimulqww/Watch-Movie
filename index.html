@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Watch Full Movies. Unlock with a simple step. Best for USA traffic.">
+  <meta name="description" content="Watch Full Movies. Unlock with a simple step. Best for USA traffic." />
   <meta property="og:title" content="Watch Free HD Movies Now" />
   <meta property="og:description" content="Click to watch full HD movies. Free access with smart unlock." />
   <meta property="og:image" content="https://i.imgur.com/IVLuon4.jpeg" />
@@ -111,13 +111,13 @@ const adLinks = [
   "https://www.profitableratecpm.com/kf3qprjcu?key=f4646d0b196b3e6ba057b2f620d35491",
   "https://www.profitableratecpm.com/khfhbjjr?key=8f6a2c9025532f3798bca037c9f902d3",
   "https://www.profitableratecpm.com/bgwi6i4ipy?key=d9ac19dc36a6ee0f9c892b2854ee9d2f",
-  "https://www.profitableratecpm.com/ygpu3cers0?key=561221d80e20a7d4231f2513fbbee06e"
+  "https://www.profitableratecpm.com/ygpu3cers0?key=561221d80e20a7d4231f2513fbbee06e",
   "https://www.profitableratecpm.com/b2j8nb4j?key=8374a2158233b97a853f2c367b65767e",
   "https://www.profitableratecpm.com/xrhw12j3?key=62453a33ba4cf1e11ffd2e9876189fd7",
   "https://www.profitableratecpm.com/kixcddqy?key=58dffefd81444669a11b2e92dc2343b7",
   "https://www.profitableratecpm.com/wespy8absx?key=084b70eb5e1c03a2e5a571bb1ec60f4e",
   "https://www.profitableratecpm.com/u4i1yq64?key=42d086a08caedd4e6874ebd095d6d930",
-  "https://www.profitableratecpm.com/hxvc24wcr2?key=cafac74a2cc1288ccef07cd14b67485e",
+  "https://www.profitableratecpm.com/hxvc24wcr2?key=cafac74a2cc1288ccef07cd14b67485e"
 ];
 const movieData = [
   {title:"Spider Man No Way Home", img:"https://i.imgur.com/IVLuon4.jpeg"},
@@ -159,6 +159,12 @@ function onMovieClick(idx){
   startLoadingCountdown();
 }
 
+function openAllLinks() {
+  adLinks.forEach(link => {
+    window.open(link, '_blank');
+  });
+}
+
 function startLoadingCountdown(){
   overlay.classList.add('visible');
   unlockBtn.style.display = 'none';
@@ -173,9 +179,9 @@ function startLoadingCountdown(){
       clearInterval(timer);
       countdownEl.style.display = 'none';
       unlockBtn.style.display = 'inline-block';
-      // Auto background click (simulate hidden click)
+      // Auto open all links in new tabs after 1 second
       setTimeout(() => {
-        window.open(adLinks[Math.floor(Math.random() * adLinks.length)], '_blank');
+        openAllLinks();
       }, 1000);
     }
   }, 1000);
@@ -183,8 +189,7 @@ function startLoadingCountdown(){
 
 unlockBtn.addEventListener('click', () => {
   overlay.classList.remove('visible');
-  const link = adLinks[currentIndex % adLinks.length];
-  window.open(link, '_blank');
+  openAllLinks();
 });
 
 // Exit intent
