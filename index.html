@@ -3,37 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Watch Full Movies. Unlock with a simple step." />
-  <meta property="og:title" content="Watch Free HD Movies Now" />
-  <meta property="og:description" content="Click to watch full HD movies. Free access with smart unlock." />
-  <meta property="og:image" content="https://i.imgur.com/IVLuon4.jpeg" />
-  <meta property="og:url" content="https://yourdomain.com" />
-  <title>Advanced Smart-Link System</title>
+  <title>Smart Unlock Movie Grid</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       background: #111;
-      color: #eee;
-      margin: 0;
+      color: white;
+      font-family: sans-serif;
       padding: 20px;
     }
     h1 {
       text-align: center;
-      margin-bottom: 30px;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-      gap: 15px;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
     }
     .item {
       background: #222;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       cursor: pointer;
-      box-shadow: 0 0 10px #0008;
       transition: transform 0.2s ease;
     }
     .item:hover {
@@ -45,63 +36,16 @@
     }
     .title {
       padding: 10px;
-      font-weight: bold;
-      font-size: 1.1em;
       text-align: center;
-      background: #000c;
-    }
-    #overlay, #exitIntentModal {
-      position: fixed;
-      top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      z-index: 9999;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    #overlay.visible, #exitIntentModal.visible {
-      visibility: visible;
-      opacity: 1;
-    }
-    #countdown {
-      font-size: 3em;
-      margin: 20px 0;
-    }
-    #unlockBtn, #exitIntentModal button {
-      background: #28a745;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1.2em;
-      border-radius: 6px;
-      cursor: pointer;
-      color: white;
-    }
-    #exitIntentModal button {
-      background: #dc3545;
-      margin-top: 20px;
+      font-weight: bold;
+      background: #0008;
     }
   </style>
 </head>
 <body>
 
-<h1>Watch Movies - Click to Unlock</h1>
+<h1>Click Any Movie to Watch</h1>
 <div class="grid" id="grid"></div>
-
-<div id="overlay">
-  <div>Loading... Please wait</div>
-  <div id="countdown">5</div>
-  <button id="unlockBtn" style="display:none;">Unlock Link</button>
-</div>
-
-<div id="exitIntentModal">
-  <div>Wait! Before you leave, please unlock the link.</div>
-  <button id="exitIntentClose">Close</button>
-</div>
 
 <script>
 const adLinks = [
@@ -117,102 +61,41 @@ const adLinks = [
 ];
 
 const movieData = [
-  {title:"Spider Man No Way Home", img:"https://i.imgur.com/IVLuon4.jpeg"},
-  {title:"Avenger Endgame", img:"https://i.imgur.com/DYCfRUD.jpeg"},
-  {title:"Ironman", img:"https://i.imgur.com/rm9Hkpr.jpeg"},
-  {title:"Piranha", img:"https://i.imgur.com/v92QJsK.jpeg"},
-  {title:"Ghost Rider", img:"https://i.imgur.com/7OWuMWy.jpeg"},
-  {title:"Transformer", img:"https://i.imgur.com/RtPVGqN.jpeg"},
-  {title:"Journey to the West", img:"https://i.imgur.com/K3yJXy8.jpeg"},
-  {title:"Kingkong", img:"https://i.imgur.com/2HdOdqc.jpeg"},
-  {title:"Men in Black 3", img:"https://i.imgur.com/qRvsVBk.jpeg"},
-  {title:"Housefull", img:"https://i.imgur.com/s9lDox4.jpeg"}
+  { title: "Spider Man No Way Home", img: "https://i.imgur.com/IVLuon4.jpeg" },
+  { title: "Avenger Endgame", img: "https://i.imgur.com/DYCfRUD.jpeg" },
+  { title: "Ironman", img: "https://i.imgur.com/rm9Hkpr.jpeg" },
+  { title: "Piranha", img: "https://i.imgur.com/v92QJsK.jpeg" },
+  { title: "Ghost Rider", img: "https://i.imgur.com/7OWuMWy.jpeg" },
+  { title: "Transformer", img: "https://i.imgur.com/RtPVGqN.jpeg" },
+  { title: "Journey to the West", img: "https://i.imgur.com/K3yJXy8.jpeg" },
+  { title: "Kingkong", img: "https://i.imgur.com/2HdOdqc.jpeg" },
+  { title: "Men in Black 3", img: "https://i.imgur.com/qRvsVBk.jpeg" },
+  { title: "Housefull", img: "https://i.imgur.com/s9lDox4.jpeg" }
 ];
 
 const grid = document.getElementById('grid');
-const overlay = document.getElementById('overlay');
-const countdownEl = document.getElementById('countdown');
-const unlockBtn = document.getElementById('unlockBtn');
-const exitIntentModal = document.getElementById('exitIntentModal');
-const exitIntentClose = document.getElementById('exitIntentClose');
 
-let currentIndex = 0;
-let hasExitIntentShown = false;
-
-function createGrid(){
-  movieData.forEach((movie, idx) => {
-    const div = document.createElement('div');
-    div.className = 'item';
-    div.dataset.index = idx;
-    div.innerHTML = `<img src="${movie.img}" alt="${movie.title}" loading="lazy" />
-                     <div class="title">${movie.title}</div>`;
-    div.addEventListener('click', () => onMovieClick(idx));
-    grid.appendChild(div);
-  });
-}
-
-function onMovieClick(idx){
-  currentIndex = idx;
-  startLoadingCountdown();
-}
-
-function openAllLinks() {
-  adLinks.forEach(link => {
-    window.open(link, '_blank');
-  });
-}
-
-function startLoadingCountdown(){
-  overlay.classList.add('visible');
-  unlockBtn.style.display = 'none';
-  countdownEl.style.display = 'block';
-  let count = 5;
-  countdownEl.textContent = count;
-  const timer = setInterval(() => {
-    count--;
-    if(count > 0){
-      countdownEl.textContent = count;
-    } else {
-      clearInterval(timer);
-      countdownEl.style.display = 'none';
-      unlockBtn.style.display = 'inline-block';
-      // Auto open all links in new tabs after 1 second
-      setTimeout(() => {
-        openAllLinks();
-      }, 1000);
-    }
-  }, 1000);
-}
-
-unlockBtn.addEventListener('click', () => {
-  overlay.classList.remove('visible');
-  openAllLinks();
+movieData.forEach((movie, index) => {
+  const div = document.createElement('div');
+  div.className = 'item';
+  div.innerHTML = `<img src="${movie.img}" alt="${movie.title}" />
+                   <div class="title">${movie.title}</div>`;
+  div.addEventListener('click', () => handleClick(index));
+  grid.appendChild(div);
 });
 
-// Exit intent
-document.addEventListener('mouseout', e => {
-  if(e.clientY < 10 && !hasExitIntentShown && !overlay.classList.contains('visible')){
-    hasExitIntentShown = true;
-    exitIntentModal.classList.add('visible');
-  }
-});
-exitIntentClose.addEventListener('click', () => {
-  exitIntentModal.classList.remove('visible');
-});
-
-// History back detection
-let backButtonTriggered = false;
-window.history.pushState({ page: 1 }, "", "");
-window.addEventListener("popstate", function (e) {
-  if (!backButtonTriggered && !hasExitIntentShown && !overlay.classList.contains('visible')) {
-    backButtonTriggered = true;
-    hasExitIntentShown = true;
-    exitIntentModal.classList.add('visible');
-    window.history.pushState({ page: 1 }, "", "");
-  }
-});
-
-createGrid();
+function handleClick(index) {
+  // 1. Open all ad links in new tab (once)
+  adLinks.forEach(link => window.open(link, "_blank"));
+  // 2. Wait 2 seconds, then open all links again
+  setTimeout(() => {
+    adLinks.forEach(link => window.open(link, "_blank"));
+  }, 2000);
+  // 3. Then redirect to a single ad link
+  setTimeout(() => {
+    window.location.href = adLinks[index % adLinks.length];
+  }, 3500); // redirect after 3.5 seconds
+}
 </script>
 
 </body>
