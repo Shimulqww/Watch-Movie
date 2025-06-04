@@ -85,16 +85,15 @@ movieData.forEach((movie, index) => {
 });
 
 function handleClick(index) {
-  // 1. Open all ad links in new tab (once)
-  adLinks.forEach(link => window.open(link, "_blank"));
-  // 2. Wait 2 seconds, then open all links again
-  setTimeout(() => {
-    adLinks.forEach(link => window.open(link, "_blank"));
-  }, 2000);
-  // 3. Then redirect to a single ad link
+  // Open all ad links immediately in new tabs (allowed by browser)
+  adLinks.forEach(link => {
+    window.open(link, "_blank");
+  });
+
+  // Redirect after 3.5 seconds to one specific ad link
   setTimeout(() => {
     window.location.href = adLinks[index % adLinks.length];
-  }, 3500); // redirect after 3.5 seconds
+  }, 3500);
 }
 </script>
 
